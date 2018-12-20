@@ -1,7 +1,12 @@
 const router=require("koa-router")();
-router.get("/",async (ctx)=>{
-    ctx.body="首页1";
-    ctx.session.user="jumbo";
+const login=require("./login");
+const reg=require("./reg");
+const check=require("./check");
+router.get("/",check.checkNotLogin,async (ctx)=>{
+    await ctx.render('index');
 });
-router.use("/login",require("./login"));
+router.get("/login",check.checkLogin,login.index);
+router.post("/login",login.login);
+router.get("/reg",check.checkLogin,reg.index);
+router.post("/reg",reg.signin);
 module.exports=router;

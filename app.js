@@ -1,8 +1,16 @@
 const Koa=require("koa");
+const path=require('path');
 const session=require('koa-session');
+const render=require('koa-art-template');
 const app=new Koa();
 const router=require("./routes");
+const bodyParser=require("koa-bodyparser");
 app.use(require('koa-static')(__dirname+'/public'));
+app.use(bodyParser());
+render(app,{
+    root:path.join(__dirname,'views'),
+    extname:".html"
+});
 app.keys = ['some secret hurr'];
 const CONFIG = {
     key: 'koa:sess', /** (string) cookie key (default is koa:sess) */
@@ -20,4 +28,7 @@ const CONFIG = {
 
 app.use(session(CONFIG, app));
 app.use(router.routes()).use(router.allowedMethods());
-app.listen(3001);
+app.listen(3000);
+app.on('error',function (err) {
+    console.log(err.stack);
+});

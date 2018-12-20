@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <title>hello</title>
+  </head>
+  <body>
+    <div class="hello">
+        <% if(type){%>
+        <form action="/reg" method="post">
+          <%}else{%>
+          <form action="/login" method="post">
+          <%}%>
+          <div class="input-group">
+            <div class="input-group-addon require-parent">
+              <span>用户名</span>
+              <% if(userMsg){ %>
+              <em class="require-mark"><%= userMsg %></em>
+              <% } %>
+            </div>
+            <input autocomplete="off" name="username" id="username" type="text" class="form-control" placeholder="请输入用户名..." aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group">
+            <div class="input-group-addon require-parent">
+              <span>密码</span>
+              <% if(pwdMsg){ %>
+              <em class="require-mark"><%= pwdMsg %></em>
+              <% } %>
+            </div>
+            <input id="pwd" name="pwd" type="password" class="form-control" placeholder="请输入密码..." aria-describedby="basic-addon1">
+          </div>
+          <div class="input-group">
+              <% if(type){%>
+                <button class="btn">注册</button>
+                <a href="/login" style="font-size:12px;vertical-align: bottom;margin-left: 5px;">直接登陆...</a>
+              <%}else{%>
+                <button class="btn">登陆</button>
+                <a href="/reg" style="font-size:12px;vertical-align: bottom;margin-left: 5px;">没有账号？前去注册...</a>
+              <% }%>
+
+          </div>
+        </form>
+      </div>
+
+      <script>
+        /*function login(){
+          let username=$("#username").val();
+          let pwd=$("#pwd").val();
+            $.post("/login",{username:username,pwd:pwd},function(msg){
+              console.log(pwd);
+            });
+          }*/
+      </script>
+  </body>
+</html>
